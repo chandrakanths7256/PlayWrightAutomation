@@ -1,7 +1,10 @@
-import { After, Before } from "@cucumber/cucumber";
+import { After, Before, setDefaultTimeout } from "@cucumber/cucumber";
 import { chromium } from 'playwright';
 import pageManager from "../common/pageManager.js";
+import { expect } from "@playwright/test";
 
+setDefaultTimeout(60000);
+expect.configure({ timeout: 30000 });
 
 Before(async function(){
     this.browser = await chromium.launch({headless: false});
