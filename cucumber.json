@@ -3,6 +3,9 @@
     "paths": ["tests/features/cartApplication.feature"],
     "import": ["tests/stepdefinitions","tests/hooks"],
     "publishQuiet": true,
-     "timeout": 30000
+     "timeout": 30000,
+      "expect": {
+        "timeout": 30000
+    }
   }
 }
