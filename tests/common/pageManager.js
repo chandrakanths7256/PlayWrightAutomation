@@ -1,3 +1,4 @@
+import cartApplicationPage from "../pages/cartApplicationPage.js";
 import goToNewTab from "../pages/goToNewTab.js";
 import loginPage from "./loginPage.js";
 
@@ -12,6 +13,10 @@ class pageManager{
 
     get newTab(){
         return new goToNewTab(this.page);
+    }
+
+    get cartApplication(){
+        return new cartApplicationPage(this.page);
     }
 }
 

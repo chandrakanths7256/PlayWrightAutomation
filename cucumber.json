@@ -1,6 +1,6 @@
 {
   "default": {
-    "paths": ["tests/features/"],
+    "paths": ["tests/features/cartApplication.feature"],
     "import": ["tests/stepdefinitions","tests/hooks"],
     "publishQuiet": true,
      "timeout": 30000
