@@ -15,11 +15,10 @@ Given("user login to the cart application",async function(){
     await expect(this.pages.cartApplication.cartHeadingDescription).toHaveText("Automation Practice");
 })
 
-Then("User selects the cart item dynamically",async function(){
+Then(/^User selects the cart item dynamically (.*):(.*)/,async function(expectedItem,successCartMessage){
     console.log("User selects the cart item dynamically");
-    const expectedItem = "ZARA COAT 3";
-    const successCartMessage = "Product Added To Cart";
     const cartItems = await this.pages.cartApplication.cartItems.all();
+    console.log(await this.pages.cartApplication.cartItems.locator('b').allTextContents());
     for(const items of cartItems){
         const text = await items.locator('b').textContent();
         if(text === expectedItem){
@@ -29,4 +28,12 @@ Then("User selects the cart item dynamically",async function(){
     }
     await this.pages.cartApplication.cartAddedToastMessage.waitFor();
     await expect(this.pages.cartApplication.cartAddedToastMessage).toHaveText(successCartMessage);
+})
+
+Then("User verifies the items are added to the cart",async function(){
+    console.log("User verifies the items are added to the cart");
+    await this.pages.cartApplication.btnCart.click();
+    await this.pages.cartApplication.myCartHeading.waitFor();
+    console.log("Heading is: "+await this.pages.cartApplication.myCartHeading.textContent());
+    expect(await this.pages.cartApplication.myCartHeading).toHaveText("My Cart");
 })

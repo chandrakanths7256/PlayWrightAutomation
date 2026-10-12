@@ -7,6 +7,8 @@ class cartApplicationPage{
         this.cartHeadingDescription = page.locator('p',{hasText:'Automation Practice'}); 
         this.cartItems = page.locator('.card-body');
         this.cartAddedToastMessage = page.locator('#toast-container');
+        this.btnCart = page.locator('button[routerlink*="cart"]');
+        this.myCartHeading = page.getByRole('heading',{name:'My Cart'});
     }
 
 }
