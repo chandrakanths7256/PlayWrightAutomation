@@ -8,7 +8,8 @@ class cartApplicationPage{
         this.cartItems = page.locator('.card-body');
         this.cartAddedToastMessage = page.locator('#toast-container');
         this.btnCart = page.locator('button[routerlink*="cart"]');
-        this.myCartHeading = page.getByRole('heading',{name:'My Cart'});
+        this.myCartHeading = page.locator('h1:has-text("My Cart")'); //Pseudo class selector
+        this.myCartItemName = page.locator('.cartSection h3');
     }
 
 }

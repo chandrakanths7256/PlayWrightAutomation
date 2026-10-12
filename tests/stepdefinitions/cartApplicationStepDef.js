@@ -4,7 +4,8 @@ import { expect } from "@playwright/test";
 
 Given("user login to the cart application",async function(){
     console.log("user login to the cart application");
-    await this.pages.loginPage.visitPage('https://rahulshettyacademy.com/client');
+    await this.pages.loginPage.visitPage('https://rahulshettyacademy.com/client'); 
+    await this.pages.cartApplication.userEmail.waitFor();
     await this.pages.cartApplication.userEmail.fill("chandrakanth007@gmail.com");
     await this.pages.cartApplication.userPassword.fill("Chan@123");
     await this.pages.cartApplication.btnLogin.click();
@@ -30,10 +31,21 @@ Then(/^User selects the cart item dynamically (.*):(.*)/,async function(expected
     await expect(this.pages.cartApplication.cartAddedToastMessage).toHaveText(successCartMessage);
 })
 
-Then("User verifies the items are added to the cart",async function(){
+Then(/^User verifies the items are added to the cart (.*)$/,async function(expectedItem){
     console.log("User verifies the items are added to the cart");
     await this.pages.cartApplication.btnCart.click();
     await this.pages.cartApplication.myCartHeading.waitFor();
     console.log("Heading is: "+await this.pages.cartApplication.myCartHeading.textContent());
-    expect(await this.pages.cartApplication.myCartHeading).toHaveText("My Cart");
+    await expect(this.pages.cartApplication.myCartHeading).toHaveText("My Cart");
+    const myCartItems = await this.pages.cartApplication.myCartItemName.all();
+    let isAdded = false;
+    for(const items of myCartItems){
+        const text = await items.textContent();
+        if(text === expectedItem){
+            isAdded = true;
+            console.log("Item is added to the cart successfully");
+            break;
+        }
+    }
+    await expect(isAdded).toBeTruthy();
 })
