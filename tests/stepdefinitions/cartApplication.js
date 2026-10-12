@@ -23,7 +23,7 @@ Then("User selects the cart item dynamically",async function(){
     for(const items of cartItems){
         const text = await items.locator('b').textContent();
         if(text === expectedItem){
-            await items.locator(' .fa-shopping-cart').click();
+            await items.locator('text=Add to Cart').click();
         }
     }
     await this.pages.cartApplication.cartAddedToastMessage.waitFor();
