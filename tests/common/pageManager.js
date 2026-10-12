@@ -1,6 +1,6 @@
 import cartApplicationPage from "../pages/cartApplicationPage.js";
 import goToNewTab from "../pages/goToNewTab.js";
-import loginPage from "./loginPage.js";
+import loginPage from "../pages/loginPage.js";
 
 class pageManager{
     constructor(page){
