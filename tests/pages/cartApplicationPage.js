@@ -26,6 +26,8 @@ class cartApplicationPage{
         this.tableOrders = page.locator('tbody tr');
         this.txtOrderSummaryHeading = page.locator('.email-title').nth(0);
         this.orderIdInSummary = page.locator('.col-text ').nth(0);
+        this.address = page.locator('.address .content-title');
+        this.MyOrderName = page.locator('.artwork-card-info .title');
     }
 
 }

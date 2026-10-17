@@ -90,7 +90,7 @@ Then("User verfies the order is placed successfully",async function(){
     await expect(this.pages.cartApplication.txtThankyouOrder).toHaveText(" Thankyou for the order. ");
 })
 
-Then("User verifies the order is stored in the orders history",async function(){
+Then(/^User verifies the order is stored in the orders history (.*):(.*)$/,async function(email,expectedItem){
     let myOrderId = await this.pages.cartApplication.orderId.textContent();
     myOrderId = myOrderId.replaceAll('|','').trim();
     await this.pages.cartApplication.btnMyOrders.click();
@@ -112,4 +112,20 @@ Then("User verifies the order is stored in the orders history",async function(){
     await expect(this.pages.cartApplication.txtOrderSummaryHeading).toHaveText(' order summary ');
     console.log(await this.pages.cartApplication.orderIdInSummary.textContent());
     await expect(this.pages.cartApplication.orderIdInSummary).toHaveText(myOrderId);
+    let isAddress = false;
+    console.log(await this.pages.cartApplication.address.count());
+    for(let i=0; i< await this.pages.cartApplication.address.count(); i++){
+        const address = await this.pages.cartApplication.address.nth(i).textContent();
+        if(address.trim() == "Billing Address"){
+            console.log(await this.pages.cartApplication.address.nth(i).locator('..').locator('.text').nth(0).textContent());
+            console.log(await this.pages.cartApplication.address.nth(i).locator('..').locator('.text').nth(1).textContent());
+            await expect(this.pages.cartApplication.address.nth(i).locator('..').locator('.text').nth(0)).toHaveText(email);
+            await expect(this.pages.cartApplication.address.nth(i).locator('..').locator('.text').nth(1)).toHaveText(' Country - United States ');
+            isAddress = true;
+            break;
+        }
+    }
+    expect(isAddress).toBeTruthy();
+    console.log(await this.pages.cartApplication.MyOrderName.textContent());
+    await expect(await this.pages.cartApplication.MyOrderName).toHaveText(expectedItem);
 })
