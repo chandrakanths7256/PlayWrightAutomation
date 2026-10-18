@@ -7,7 +7,7 @@ Given(/^user login to the cart application (.*):(.*)/,async function(email,passw
     console.log("user login to the cart application");
     await this.pages.loginPage.visitPage('https://rahulshettyacademy.com/client');
     await this.page.waitForLoadState('networkidle');
-    await this.pages.cartApplication.loginHeading.waitFor({timeout: 100000});
+    await this.pages.cartApplication.loginHeading.waitFor();
     await expect(this.pages.cartApplication.loginHeading).toHaveText("Log in"); 
     await this.pages.cartApplication.userEmail.waitFor();
     await this.pages.cartApplication.userEmail.fill(email);

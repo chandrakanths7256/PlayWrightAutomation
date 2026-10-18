@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "cucumber-js",
+    "myplaywrighttests": "playwright test",
+    "mytestsheaded": "playwright test --headed"
   },
   "keywords": [],
   "author": "",
