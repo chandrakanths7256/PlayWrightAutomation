@@ -18,7 +18,7 @@ class cartApplicationPage{
         this.selectCountry = page.locator('input[placeholder="Select Country"]');
         this.selectCountryOptions = (country) => page.locator('.list-group:nth-child(2) button').getByText(country,{exact:true});
         this.lblUserEmail = page.locator('.user__name [type="text"]').nth(0);
-        this.btnPlaceOrder = page.locator('.action__submit');
+        this.btnPlaceOrder = page.getByText("PLACE ORDER");
         this.txtThankyouOrder = page.locator('.hero-primary');
         this.orderId = page.locator('.em-spacer-1 .ng-star-inserted');
         this.btnMyOrders = page.locator('button[routerlink*="myorders"]')
