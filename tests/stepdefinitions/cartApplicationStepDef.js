@@ -22,15 +22,7 @@ Given(/^user login to the cart application (.*):(.*)/,async function(email,passw
 
 Then(/^User selects the cart item dynamically (.*):(.*)/,async function(expectedItem,successCartMessage){
     console.log("User selects the cart item dynamically");
-    const cartItems = this.pages.cartApplication.cartItems;
-    console.log(await cartItems.locator('b').allTextContents());
-    for(const items of await cartItems.all()){
-        const text = await items.locator('b').textContent();
-        if(text === expectedItem){
-            await items.locator('text=Add to Cart').click();
-            break;
-        }
-    }
+    await this.pages.cartApplication.cartItems(expectedItem).locator('text=Add to Cart').click();
     await this.pages.cartApplication.cartAddedToastMessage.waitFor();
     await expect(this.pages.cartApplication.cartAddedToastMessage).toHaveText(successCartMessage);
 })

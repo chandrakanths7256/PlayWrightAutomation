@@ -1,7 +1,11 @@
 {
   "default": {
     "paths": ["tests/features/cartApplication.feature"],
-    "import": ["tests/stepdefinitions","tests/hooks"],
+    "import": [
+      "tests/stepdefinitions/cartApplicationStepDef.js",
+      "tests/stepdefinitions/goToNewTabstepdef.js",
+      "tests/hooks/hooks.js"
+    ],
     "publishQuiet": true,
      "timeout": 600000
   }
